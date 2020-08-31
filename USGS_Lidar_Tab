@@ -1,0 +1,862 @@
+
+Sub Worksheet_Change(ByVal Target As Range)
+    On Error Resume Next
+    If Target.Cells.Count > 1 Then Exit Sub
+
+    'Checklist Setup Review
+    Dim LastRow As Long
+    Dim i As Long
+    Dim xRg As Range
+    Dim x As String
+    Dim NewRng As Range
+
+    LastRow = Cells(Rows.Count, "H").End(xlUp).Row
+    For i = 1 To LastRow
+        If UCase(Cells(i, "H").Value) = "P" Then
+            If NewRng Is Nothing Then
+                Set NewRng = Cells(i, "A")
+            Else
+                Set NewRng = Union(NewRng, Cells(i, "A"))
+            End If
+        End If
+    Next i
+
+    'Initial Lidar Review
+    Dim LastRow1 As Long
+    Dim e As Long
+    Dim xRg1 As Range
+    Dim NewRng1 As Range
+
+    LastRow1 = Cells(Rows.Count, "I").End(xlUp).Row
+    For e = 1 To LastRow1
+        If UCase(Cells(e, "I").Value) = "P" Then
+            If NewRng1 Is Nothing Then
+                Set NewRng1 = Cells(e, "A")
+            Else
+                Set NewRng1 = Union(NewRng1, Cells(e, "A"))
+            End If
+        End If
+    Next e
+
+    'Swath Vertical Accuracy
+    Dim LastRow13 As Long
+    Dim xRg13 As Range
+    Dim o As Long
+    Dim NewRng13 As Range
+
+    LastRow13 = Cells(Rows.Count, "J").End(xlUp).Row
+    For o = 1 To LastRow13
+        If UCase(Cells(o, "J").Value) = "P" Then
+            If NewRng13 Is Nothing Then
+                Set NewRng13 = Cells(o, "A")
+            Else
+                Set NewRng13 = Union(NewRng13, Cells(o, "A"))
+            End If
+        End If
+    Next o
+
+    'Initial Ground Macro Review
+    Dim LastRow2 As Long
+    Dim xRg2 As Range
+    Dim j As Long
+    Dim NewRng2 As Range
+
+    LastRow2 = Cells(Rows.Count, "L").End(xlUp).Row
+    For j = 1 To LastRow2
+        If UCase(Cells(j, "L").Value) = "P" Then
+            If NewRng2 Is Nothing Then
+                Set NewRng2 = Cells(j, "A")
+            Else
+                Set NewRng2 = Union(NewRng2, Cells(j, "A"))
+            End If
+        End If
+    Next j
+
+    'DASH Corrections to Swaths/Blocks
+    Dim LastRow3 As Long
+    Dim g As Long
+    Dim NewRng3 As Range
+
+    LastRow3 = Cells(Rows.Count, "K").End(xlUp).Row
+    For g = 1 To LastRow3
+        If UCase(Cells(g, "K").Value) = "P" Then
+            If NewRng3 Is Nothing Then
+                Set NewRng3 = Cells(g, "A")
+            Else
+                Set NewRng3 = Union(NewRng3, Cells(g, "A"))
+            End If
+        End If
+    Next g
+
+    'Ground Density Raster Review
+    Dim LastRow4 As Long
+    Dim t As Long
+    Dim NewRng4 As Range
+
+    LastRow4 = Cells(Rows.Count, "N").End(xlUp).Row
+    For t = 1 To LastRow4
+        If UCase(Cells(t, "N").Value) = "P" Then
+            If NewRng4 Is Nothing Then
+                Set NewRng4 = Cells(t, "A")
+            Else
+                Set NewRng4 = Union(NewRng4, Cells(t, "A"))
+            End If
+        End If
+    Next t
+
+    'Initial VVA Testing Review
+    Dim LastRow5 As Long
+    Dim v As Long
+    Dim NewRng5 As Range
+
+    LastRow5 = Cells(Rows.Count, "M").End(xlUp).Row
+    For v = 1 To LastRow5
+        If UCase(Cells(v, "M").Value) = "P" Then
+            If NewRng5 Is Nothing Then
+                Set NewRng5 = Cells(v, "A")
+            Else
+                Set NewRng5 = Union(NewRng5, Cells(v, "A"))
+            End If
+        End If
+    Next v
+
+
+   '10% Ground Check
+   Dim LastRow6 As Long
+   Dim n As Long
+   Dim NewRng6 As Range
+
+   LastRow6 = Cells(Rows.Count, "O").End(xlUp).Row
+   For n = 1 To LastRow6
+    If UCase(Cells(n, "O").Value) = "P" Then
+        If NewRng6 Is Nothing Then
+            Set NewRng6 = Cells(n, "A")
+        Else
+            Set NewRng6 = Union(NewRng6, Cells(n, "A"))
+        End If
+    End If
+    Next n
+
+
+    'Noise Density Raster Review
+    Dim LastRow7 As Long
+    Dim y As Long
+    Dim NewRng7 As Range
+
+    LastRow7 = Cells(Rows.Count, "P").End(xlUp).Row
+    For y = 1 To LastRow7
+        If UCase(Cells(y, "P").Value) = "P" Then
+            If NewRng7 Is Nothing Then
+                Set NewRng7 = Cells(y, "A")
+            Else
+                Set NewRng7 = Union(NewRng7, Cells(y, "A"))
+            End If
+        End If
+    Next y
+
+    'Lidar Final Absolute Accuracy Review
+    Dim LastRow8 As Long
+    Dim a As Long
+    Dim NewRng8 As Range
+
+    LastRow8 = Cells(Rows.Count, "R").End(xlUp).Row
+    For a = 1 To LastRow8
+        If UCase(Cells(a, "R").Value) = "P" Then
+            If NewRng8 Is Nothing Then
+                Set NewRng8 = Cells(a, "A")
+            Else
+                Set NewRng8 = Union(NewRng8, Cells(a, "A"))
+            End If
+        End If
+     Next a
+
+  'LAS Stats Review
+  Dim LastRow9 As Long
+  Dim z As Long
+  Dim NewRng9 As Range
+
+  LastRow9 = Cells(Rows.Count, "S").End(xlUp).Row
+  For z = 1 To LastRow9
+    If UCase(Cells(z, "S").Value) = "P" Then
+        If NewRng9 Is Nothing Then
+            Set NewRng9 = Cells(z, "A")
+        Else
+            Set NewRng9 = Union(NewRng9, Cells(z, "A"))
+        End If
+    End If
+  Next z
+
+
+ 'Z Range Raster Review
+ Dim LastRow11 As Long
+ Dim l As Long
+ Dim NewRng11 As Range
+
+ LastRow11 = Cells(Rows.Count, "Q").End(xlUp).Row
+ For l = 1 To LastRow11
+    If UCase(Cells(l, "Q").Value) = "P" Then
+        If NewRng11 Is Nothing Then
+            Set NewRng11 = Cells(l, "A")
+        Else
+            Set NewRng11 = Union(NewRng11, Cells(l, "A"))
+        End If
+    End If
+ Next l
+
+ 'DASH Corrections to Block
+ Dim LastRow12 As Long
+ Dim p As Long
+ Dim NewRng12 As Range
+
+ LastRow12 = Cells(Rows.Count, "K").End(xlUp).Row
+ For p = 1 To LastRow12
+    If UCase(Cells(p, "K").Value) = "P" Then
+        If NewRng12 Is Nothing Then
+            Set NewRng12 = Cells(p, "A")
+        Else
+            Set NewRng12 = Union(NewRng12, Cells(p, "A"))
+        End If
+    End If
+Next p
+
+
+'Call Email subs
+Set xRg = Intersect(NewRng, Target)
+If Not xRg Is Nothing Then
+    x = True
+    For Each r In NewRng
+        If r.Value <> "Pass" And r.Value <> "Complete" Then
+            x = False
+        End If
+    Next r
+    If x = True Then
+        MsgBox "Project Setup Review Completed: Auto Email Sent"
+        Call SetupReview_Email
+    End If
+Else
+    Set xRg = Intersect(NewRng1, Target)
+    If Not xRg Is Nothing Then
+        x = True
+        For Each r In NewRng1
+            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                x = False
+            End If
+        Next r
+        If x = True Then
+            MsgBox "Initial Lidar Review Completed: Auto Email Sent."
+            Call InitialLidarReview_Email
+        End If
+    Else
+        Set xRg = Intersect(NewRng2, Target)
+        If Not xRg Is Nothing Then
+            x = True
+            For Each r In NewRng2
+                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                    x = False
+                End If
+            Next r
+            If x = True Then
+                MsgBox "Initial Ground Macro Review Completed: Auto Email Sent."
+                Call GroundMacroReview_Email
+            End If
+        Else
+            Set xRg = Intersect(NewRng3, Target)
+            If Not xRg Is Nothing Then
+                x = True
+                For Each r In NewRng3
+                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                        x = False
+                    End If
+                Next r
+                If x = True Then
+                    MsgBox "DASH Re-run on Swaths: Auto Email Sent."
+                    Call DASH_Corrections_Swaths_Email
+                End If
+            Else
+                Set xRg = Intersect(NewRng4, Target)
+                If Not xRg Is Nothing Then
+                    x = True
+                    For Each r In NewRng4
+                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                            x = False
+                        End If
+                    Next r
+                    If x = True Then
+                        MsgBox "Ground Density Raster Review Completed: Auto Email Sent."
+                        Call GroundDensityReview_Email
+                    End If
+                Else
+                    Set xRg = Intersect(NewRng5, Target)
+                    If Not xRg Is Nothing Then
+                        x = True
+                        For Each r In NewRng5
+                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                x = False
+                            End If
+                        Next r
+                        If x = True Then
+                            MsgBox "Initial VVA Testing Review Completed: Auto Email Sent."
+                            Call InitialVVAReview_Email
+                        End If
+                    Else
+                        Set xRg = Intersect(NewRng6, Target)
+                        If Not xRg Is Nothing Then
+                            x = True
+                            For Each r In NewRng6
+                                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                    x = False
+                                End If
+                            Next r
+                            If x = True Then
+                                MsgBox "10% Ground Check Review Completed: Auto Email Sent."
+                                Call TenPerReview_Email
+                            End If
+                        Else
+                            Set xRg = Intersect(NewRng7, Target)
+                            If Not xRg Is Nothing Then
+                                x = True
+                                For Each r In NewRng7
+                                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                        x = False
+                                    End If
+                                Next r
+                                If x = True Then
+                                    MsgBox "Noise Density Raster Review Completed: Auto Email Sent."
+                                    Call NoiseDensity_Email
+                                End If
+                            Else
+                                Set xRg = Intersect(NewRng8, Target)
+                                If Not xRg Is Nothing Then
+                                    x = True
+                                    For Each r In NewRng8
+                                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                            x = False
+                                        End If
+                                    Next r
+                                    If x = True Then
+                                        MsgBox "Lidar Final Absolute Accuracy Review Completed: Auto Email Sent."
+                                        Call FinalAbsoluteAccuracy_Email
+                                    End If
+                                Else
+                                    Set xRg = Intersect(NewRng9, Target)
+                                    If Not xRg Is Nothing Then
+                                        x = True
+                                        For Each r In NewRng9
+                                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                x = False
+                                            End If
+                                        Next r
+                                        If x = True Then
+                                            MsgBox "LAS Stats Review Completed: Auto Email Sent."
+                                            Call LASStatsReview_Email
+                                        End If
+                                    Else
+                                        Set xRg = Intersect(NewRng10, Target)
+                                        If Not xRg Is Nothing Then
+                                            x = True
+                                            For Each r In NewRng10
+                                                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                    x = False
+                                                End If
+                                            Next r
+                                            If x = True Then
+                                                MsgBox "Processing Reports Complete: Auto Email Sent"
+                                                'Call ReportsReview_Email
+                                            End If
+                                        Else
+                                            Set xRg = Intersect(NewRng11, Target)
+                                            If Not xRg Is Nothing Then
+                                                x = True
+                                                For Each r In NewRng11
+                                                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                        x = False
+                                                    End If
+                                                Next r
+                                                If x = True Then
+                                                    MsgBox "Z Range Raster Review Completed: Auto Email Sent."
+                                                    Call ZRangeRaster_Email
+                                                End If
+                                            Else
+                                                Set xRg = Intersect(NewRng12, Target)
+                                                If Not xRg Is Nothing Then
+                                                    x = True
+                                                    For Each r In NewRng12
+                                                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                            x = False
+                                                        End If
+                                                    Next r
+                                                    If x = True Then
+                                                        MsgBox "DASH Re-run on a Production Block: Auto Email Sent."
+                                                        Call DASH_Corrections_Block_Email
+                                                    End If
+                                                Else
+                                                    Set xRg = Intersect(NewRng13, Target)
+                                                    If Not xRg Is Nothing Then
+                                                        x = True
+                                                        For Each r In NewRng13
+                                                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                                x = False
+                                                            End If
+                                                        Next r
+                                                        If x = True Then
+                                                            MsgBox "Swath Vertical Accuracy Added to Accuracy Report: Email Sent."
+                                                            Call Swath_Vertical_Accuracy_Email
+                                                        End If
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End If
+End If
+
+
+
+End Sub
+Sub SetupReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Checklist Set-up Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "The step 'Checklist Set-Up' has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+
+Sub InitialLidarReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com" & "; " & "nkules@Dewberry.com" & "; " & "emcneill@Dewberry.com" & "; " & "kcoffey@Dewberry.com" & _
+    "; " & "abundrick@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Initial Checks Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "The initial checks have been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub GroundMacroReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com" & "; " & "nkules@Dewberry.com" & "; " & "emcneill@Dewberry.com" & "; " & "kcoffey@Dewberry.com" & _
+    "; " & "abundrick@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Ground Macro Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "The initial ground macro has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and test tiles are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub GroundDZReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com" & "; " & "nkules@Dewberry.com" & "; " & "emcneill@Dewberry.com" & "; " & "kcoffey@Dewberry.com" & _
+    "; " & "abundrick@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Ground DZ Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Ground DZs have been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub GroundDensityReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Ground Density Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Ground Density rasters have been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub InitialVVAReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Initial VVA Review:  " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Initial VVA testing has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub TenPerReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "10% Ground Review:  " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Initial Grounding, initial DEM, and a 10% ground check for major anomalies/issues have been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & _
+    " and are ready for review. Reviewer to consult checklist for number of production blocks to review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub NoiseDensity_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Noise Density Raster Review:  " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Noise density raster has been created for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review. Reviewer to consult checklist for number of production blocks to review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub FinalAbsoluteAccuracy_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Final Lidar Positional Accuracy Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Final lidar absolute positional accuracy has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub LASStatsReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "LAS Stats Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Final lidar stats have been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub ZRangeRaster_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Z Range Raster Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "A Z Range Raster High Noise Raster has been created and reviewed for this project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub CalibrationReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Calibration Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "The step 'Checklist Set-Up' has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub HistogramReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Histogram Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "The step 'Checklist Set-Up' has been completed for project " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub DASH_Corrections_Swaths_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Swath Corrections & DASH Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Corrections were made to the swath by either Dewberry or the acquistion provider. DASH has been re-run on the corrected swaths for this project " & _
+    Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & "." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub DASH_Corrections_Block_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Swath Corrections & DASH Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Corrections were made to a production block and DASH has been re-run on the corrected area for this project " & _
+    Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & "." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+
+Sub Swath_Vertical_Accuracy_Email()
+Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Swath Vertical Accuracy: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Swath Vertical Accuracy has been recorded on the Swath Vertical Accuracy tabs of the Accuracy Assessment spreadsheet for  " & _
+    Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " and is ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub

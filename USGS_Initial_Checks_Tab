@@ -1,0 +1,258 @@
+Public Task As String
+
+Sub Worksheet_Change(ByVal Target As Range)
+    On Error Resume Next
+    If Target.Cells.Count > 1 Then Exit Sub
+
+        'Project Initial Checks Complete
+        Set xRg = Intersect(Range("A32"), Target)
+        If Not xRg Is Nothing Then
+            x = True
+            Task = "Initial Checks"
+            For Each r In Range("A32")
+                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                    x = False
+                End If
+            Next r
+            If x = True Then
+                MsgBox "Project Initial Checks Complete: Auto Email Sent"
+                Call IC_Email
+            End If
+        Else
+            'Project Initial Checks Corrections Complete
+            Set xRg = Intersect(Range("A33"), Target)
+            If Not xRg Is Nothing Then
+                x = True
+                Task = "Initial Checks -- Corrections"
+                For Each r In Range("A33")
+                     If r.Value <> "Pass" And r.Value <> "Complete" Then
+                        x = False
+                    End If
+                Next r
+                If x = True Then
+                    MsgBox "Project Initial Checks Corrections Complete: Auto Email Sent"
+                    Call IC_Email
+                End If
+            Else
+                'Block 1 Initial Checks Complete
+                Set xRg = Intersect(Range("E32"), Target)
+                If Not xRg Is Nothing Then
+                    x = True
+                    Task = "Block 1 Initial Checks"
+                    For Each r In Range("E32")
+                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                            x = False
+                        End If
+                    Next r
+                    If x = True Then
+                        MsgBox "Block 1 Initial Checks Complete: Auto Email Sent"
+                        Call IC_Email
+                    End If
+                Else
+                    'Block 2 Initial Checks Complete
+                    Set xRg = Intersect(Range("F32"), Target)
+                    If Not xRg Is Nothing Then
+                        x = True
+                        Task = "Block 2 Initial Checks"
+                        For Each r In Range("F32")
+                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                x = False
+                            End If
+                        Next r
+                        If x = True Then
+                            MsgBox "Block 2 Initial Checks Complete: Auto Email Sent"
+                            Call IC_Email
+                        End If
+                    Else
+                        'Block 3 Initial Checks Complete
+                        Set xRg = Intersect(Range("G32"), Target)
+                        If Not xRg Is Nothing Then
+                            x = True
+                            Task = "Block 3 Initial Checks"
+                            For Each r In Range("G32")
+                                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                    x = False
+                                End If
+                            Next r
+                            If x = True Then
+                                MsgBox "Block 3 Initial Checks Complete: Auto Email Sent"
+                                Call IC_Email
+                            End If
+                        Else
+                            'Block 4 Initial Checks Complete
+                            Set xRg = Intersect(Range("H32"), Target)
+                            If Not xRg Is Nothing Then
+                                x = True
+                                Task = "Block 4 Initial Checks"
+                                For Each r In Range("H32")
+                                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                        x = False
+                                    End If
+                                Next r
+                                If x = True Then
+                                    MsgBox "Block 4 Initial Checks Complete: Auto Email Sent"
+                                    Call IC_Email
+                                End If
+                            Else
+                                'Block 5 Initial Checks Complete
+                                Set xRg = Intersect(Range("I32"), Target)
+                                If Not xRg Is Nothing Then
+                                    x = True
+                                    Task = "Block 5 Initial Checks"
+                                    For Each r In Range("I32")
+                                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                            x = False
+                                        End If
+                                    Next r
+                                    If x = True Then
+                                        MsgBox "Block 5 Initial Checks Complete: Auto Email Sent"
+                                        Call IC_Email
+                                    End If
+                                Else
+                                    'Block 6 Initial Checks Complete
+                                    Set xRg = Intersect(Range("J32"), Target)
+                                    If Not xRg Is Nothing Then
+                                        x = True
+                                        Task = "Block 6 Initial Checks"
+                                        For Each r In Range("J32")
+                                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                x = False
+                                            End If
+                                        Next r
+                                        If x = True Then
+                                            MsgBox "Block 6 Initial Checks Complete: Auto Email"
+                                            Call IC_Email
+                                        End If
+                                    Else
+                                        'Block 1 Initial Checks Corrections Complete
+                                        Set xRg = Intersect(Range("E33"), Target)
+                                        If Not xRg Is Nothing Then
+                                            x = True
+                                            Task = "Block 1 Initial Checks -- Corrections"
+                                            For Each r In Range("E33")
+                                                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                    x = False
+                                                End If
+                                            Next r
+                                            If x = True Then
+                                                MsgBox "Block 1 Initial Checks Corrections Complete: Auto Email Sent"
+                                                Call IC_Email
+                                            End If
+                                        Else
+                                            'Block 2 Initial Checks Corrections Complete
+                                            Set xRg = Intersect(Range("F33"), Target)
+                                            If Not xRg Is Nothing Then
+                                                x = True
+                                                Task = "Block 2 Initial Checks -- Corrections"
+                                                For Each r In Range("F33")
+                                                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                        x = False
+                                                    End If
+                                                Next r
+                                                If x = True Then
+                                                    MsgBox "Block 2 Initial Checks Corrections Complete: Auto Email Sent"
+                                                    Call IC_Email
+                                                End If
+                                            Else
+                                                'Block 3 Initial Checks Corrections Complete
+                                                Set xRg = Intersect(Range("G33"), Target)
+                                                If Not xRg Is Nothing Then
+                                                    x = True
+                                                    Task = "Block 3 Initial Checks -- Corrections"
+                                                    For Each r In Range("G33")
+                                                        If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                            x = False
+                                                        End If
+                                                    Next r
+                                                    If x = True Then
+                                                        MsgBox "Block 3 Initial Checks Corrections Complete: Auto Email Sent"
+                                                        Call IC_Email
+                                                    End If
+                                                Else
+                                                    'Block 4 Initial Checks Corrections Complete
+                                                    Set xRg = Intersect(Range("H33"), Target)
+                                                    If Not xRg Is Nothing Then
+                                                        x = True
+                                                        Task = "Block 4 Initial Checks -- Corrections"
+                                                        For Each r In Range("H33")
+                                                            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                                x = False
+                                                            End If
+                                                        Next r
+                                                        If x = True Then
+                                                            MsgBox "Block 4 Initial Checks Corrections Complete: Auto Email Sent"
+                                                            Call IC_Email
+                                                        End If
+                                                    Else
+                                                        'Block 5 Initial Checks Corrections Complete
+                                                        Set xRg = Intersect(Range("I33"), Target)
+                                                        If Not xRg Is Nothing Then
+                                                            x = True
+                                                            Task = "Block 5 Initial Checks -- Corrections"
+                                                            For Each r In Range("I33")
+                                                                If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                                    x = False
+                                                                End If
+                                                            Next r
+                                                            If x = True Then
+                                                                MsgBox "Block 5 Initial Checks Corrections Complete: Auto Email Sent"
+                                                                Call IC_Email
+                                                            End If
+                                                        Else
+                                                            'Block 6 Initial Checks Corrections Complete
+                                                            Set xRg = Intersect(Range("J33"), Target)
+                                                            If Not xRg Is Nothing Then
+                                                                x = True
+                                                                Task = "Block 6 Initial Checks -- Corrections"
+                                                                For Each r In Range("J33")
+                                                                    If r.Value <> "Pass" And r.Value <> "Complete" Then
+                                                                        x = False
+                                                                    End If
+                                                                Next r
+                                                                If x = True Then
+                                                                    MsgBox "Block 6 Initial Checks Corrections Complete: Auto Email Sent"
+                                                                    Call IC_Email
+                                                                End If
+                                                            End If
+                                                        End If
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+End Sub
+
+Sub IC_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com" & "; " & "nkules@Dewberry.com" & "; " & "emcneill@Dewberry.com" & "; " & "kcoffey@Dewberry.com" & _
+    "; " & "abundrick@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B10").Value & ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value & ";" & Sheets("Summary").Range("B17").Value
+    .Subject = Task & ": " & Sheets("Summary").Range("C20") & " -- " & Sheets("Summary").Range("C21")
+    .Body = Task & " for project " & Sheets("Summary").Range("C20") & " -- " & Sheets("Summary").Range("C21") & " have been completed and are ready for review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C20") & vbLf & "County Name: " & _
+    Sheets("Summary").Range("C21") & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C23") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C24") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C25") & vbLf & "Units: " & Sheets("Summary").Range("C26") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C27") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C28") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C29") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C30") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C31") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C32") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C33")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub

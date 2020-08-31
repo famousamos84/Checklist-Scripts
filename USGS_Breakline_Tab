@@ -1,0 +1,122 @@
+Sub Worksheet_Change(ByVal Target As Range)
+    On Error Resume Next
+    If Target.Cells.Count > 1 Then Exit Sub
+
+    'VVA
+    Dim LastRow As Long
+    Dim i As Long
+    Dim NewRng As Range
+
+    LastRow = Cells(Rows.Count, "H").End(xlUp).Row
+    For i = 1 To LastRow
+        If UCase(Cells(i, "H").Value) = "P" Then
+            If NewRng Is Nothing Then
+                Set NewRng = Cells(i, "A")
+            Else
+                Set NewRng = Union(NewRng, Cells(i, "A"))
+            End If
+        End If
+    Next i
+
+    'Conflation
+    Dim LastRow1 As Long
+    Dim e As Long
+    Dim NewRng1 As Range
+
+    LastRow1 = Cells(Rows.Count, "I").End(xlUp).Row
+    For e = 1 To LastRow1
+        If UCase(Cells(e, "I").Value) = "P" Then
+            If NewRng1 Is Nothing Then
+                Set NewRng1 = Cells(e, "A")
+            Else
+                Set NewRng1 = Union(NewRng, Cells(e, "A"))
+            End If
+        End If
+    Next e
+
+Set xRg = Intersect(NewRng, Target)
+If Not xRg Is Nothing Then
+    x = True
+    For Each r In NewRng
+        If r.Value <> "Pass" And r.Value <> "Complete" Then
+            x = False
+        End If
+    Next r
+    If x = True Then
+        MsgBox "Breakline Vertical Variance Completed: Auto Email Sent"
+        Call BreaklineReview_Email
+    End If
+Else
+    Set xRg = Intersect(NewRng1, Target)
+    If Not xRg Is Nothing Then
+        x = True
+        For Each r In NewRng1
+            If r.Value <> "Pass" And r.Value <> "Complete" Then
+                x = False
+            End If
+        Next r
+        If x = True Then
+            MsgBox "Conflation Needed: Auto Email sent to Conflation Team."
+            Call CenterLine_Email
+        End If
+    End If
+End If
+
+End Sub
+
+Sub BreaklineReview_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Breakline Vertical Variance Review: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Breakline vertical variance has been completed for project " & Sheets("Summary").Range("C18") & " -- " _
+    & Sheets("Summary").Range("C19") & " and is ready for review. Reviewer to consult checklist for number of production blocks to review." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+Sub CenterLine_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jnovac@Dewberry.com" & "; " & "shedrick@Dewberry.com"
+    .CC = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com" & "; " & Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & _
+    ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = "Centerline Collection Request: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = "Centerline collection will be required for " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & _
+    ". Once the automated centerlines have been generated, a review will need to be performed." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub

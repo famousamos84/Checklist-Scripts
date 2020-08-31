@@ -1,0 +1,447 @@
+Public Acq_Name As String
+
+Sub Worksheet_Change(ByVal Target As Range)
+    On Error Resume Next
+    If Target.Cells.Count > 1 Then Exit Sub
+
+        'Acquisition Provider A First
+        Set xRg = Intersect(Range("B11"), Target)
+        If Not xRg Is Nothing Then
+            x = True
+            Acq_Name = Range("B3")
+            For Each r In Range("B11")
+                If r.Value <> "Full" Then
+                    x = False
+                End If
+            Next r
+            If x = True Then
+                MsgBox "Acquisition Report Complete: Auto Email Sent"
+                Call Rec_Received_Email
+            End If
+        Else
+            'Acquisition Provider A Second
+            Set xRg = Intersect(Range("C11"), Target)
+            If Not xRg Is Nothing Then
+                x = True
+                Acq_Name = Range("B3")
+                For Each r In Range("C11")
+                  If r.Value <> "Full" Then
+                    x = False
+                  End If
+                Next r
+                If x = True Then
+                  MsgBox "Aquisition Report Complete: Auto Email Sent"
+                  Call Rec_Received_Email
+                End If
+            Else
+                'Acquisition Provider A Third
+                Set xRg = Intersect(Range("D11"), Target)
+                If Not xRg Is Nothing Then
+                    x = True
+                    Acq_Name = Range("B3")
+                    For Each r In Range("D11")
+                        If r.Value <> "Full" Then
+                            x = False
+                        End If
+                    Next r
+                    If x = True Then
+                        MsgBox "Acquisition Report Complete: Auto Email Sent"
+                        Call Rec_Received_Email
+                    End If
+                Else
+                    'Acquisition Provider B First
+                    Set xRg = Intersect(Range("E11"), Target)
+                    If Not xRg Is Nothing Then
+                        x = True
+                        Acq_Name = Range("E3")
+                        For Each r In Range("E11")
+                            If r.Value <> "Full" Then
+                                x = False
+                            End If
+                        Next r
+                        If x = True Then
+                             MsgBox "Acquisition Report Complete: Auto Email Sent"
+                             Call Rec_Received_Email
+                        End If
+                   Else
+                        'Acquisition Provider B Second
+                        Set xRg = Intersect(Range("F11"), Target)
+                        If Not xRg Is Nothing Then
+                            x = True
+                            Acq_Name = Range("E3")
+                            For Each r In Range("F11")
+                                If r.Value <> "Full" Then
+                                    x = False
+                                End If
+                            Next r
+                            If x = True Then
+                                MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                Call Rec_Received_Email
+                            End If
+                        Else
+                            'Acquisition Provider B Thrid
+                            Set xRg = Intersect(Range("G11"), Target)
+                            If Not xRg Is Nothing Then
+                                x = True
+                                Acq_Name = Range("E3")
+                                For Each r In Range("G11")
+                                    If r.Value <> "Full" Then
+                                        x = False
+                                    End If
+                                Next r
+                                If x = True Then
+                                    MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                    Call Rec_Received_Email
+                                End If
+                            Else
+                                'Acquisition Provider C First
+                                Set xRg = Intersect(Range("H11"), Target)
+                                If Not xRg Is Nothing Then
+                                    x = True
+                                    Acq_Name = Range("H3")
+                                    For Each r In Range("H11")
+                                        If r.Value <> "Full" Then
+                                            x = False
+                                        End If
+                                    Next r
+                                    If x = True Then
+                                        MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                        Call Rec_Received_Email
+                                    End If
+                                Else
+                                    'Acquisition Provider C Second
+                                    Set xRg = Intersect(Range("I11"), Target)
+                                    If Not xRg Is Nothing Then
+                                        x = True
+                                        Acq_Name = Range("H3")
+                                        For Each r In Range("I11")
+                                            If r.Value <> "Full" Then
+                                                x = False
+                                            End If
+                                        Next r
+                                        If x = True Then
+                                            MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                            Call Rec_Received_Email
+                                        End If
+                                    Else
+                                        'Acquisition Provider C Third
+                                        Set xRg = Intersect(Range("J11"), Target)
+                                        If Not xRg Is Nothing Then
+                                            x = True
+                                            Acq_Name = Range("H3")
+                                            For Each r In Range("J11")
+                                                If r.Value <> "Full" Then
+                                                    x = False
+                                                End If
+                                            Next r
+                                            If x = True Then
+                                                MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                                Call Rec_Received_Email
+                                            End If
+                                        Else
+                                            'Acquisition Provider D First
+                                            Set xRg = Intersect(Range("K11"), Target)
+                                            If Not xRg Is Nothing Then
+                                                x = True
+                                                Acq_Name = Range("K3")
+                                                For Each r In Range("K11")
+                                                    If r.Value <> "Full" Then
+                                                        x = False
+                                                    End If
+                                                Next r
+                                                If x = True Then
+                                                    MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                                    Call Rec_Received_Email
+                                                End If
+                                            Else
+                                                'Acquisition Provider D Second
+                                                Set xRg = Intersect(Range("L11"), Target)
+                                                If Not xRg Is Nothing Then
+                                                    x = True
+                                                    Acq_Name = Range("K3")
+                                                    For Each r In Range("L11")
+                                                        If r.Value <> "Full" Then
+                                                            x = False
+                                                        End If
+                                                    Next r
+                                                    If x = True Then
+                                                        MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                                        Call Rec_Received_Email
+                                                    End If
+                                                Else
+                                                    'Acquisition Provider D Third
+                                                    Set xRg = Intersect(Range("M11"), Target)
+                                                    If Not xRg Is Nothing Then
+                                                        x = True
+                                                        Acq_Name = Range("K3")
+                                                        For Each r In Range("M11")
+                                                            If r.Value <> "Full" Then
+                                                                x = False
+                                                            End If
+                                                        Next r
+                                                        If x = True Then
+                                                            MsgBox "Acquisition Report Complete: Auto Email Sent"
+                                                            Call Rec_Received_Email
+                                                        End If
+                                                    Else
+                                                        'Acquisition Provider A Incomplete First
+                                                        Set xRg = Intersect(Range("B23"), Target)
+                                                        If Not xRg Is Nothing Then
+                                                            x = True
+                                                            Acq_Name = Range("B3")
+                                                            For Each r In Range("B23")
+                                                                If r.Value <> "No" Then
+                                                                    x = Flase
+                                                                End If
+                                                            Next r
+                                                            If x = True Then
+                                                                MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                Call Rec_Incomplete_Email
+                                                            End If
+                                                        Else
+                                                            'Acquisition Provider A Incomplete Second
+                                                            Set xRg = Intersect(Range("C23"), Target)
+                                                            If Not xRg Is Nothing Then
+                                                                x = True
+                                                                Acq_Name = Range("B3")
+                                                                For Each r In Range("C23")
+                                                                    If r.Value <> "No" Then
+                                                                        x = False
+                                                                    End If
+                                                                Next r
+                                                                If x = True Then
+                                                                    MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                    Call Rec_Incomplete_Email
+                                                                End If
+                                                            Else
+                                                                'Acquisition Provider A Incomplete Third
+                                                                Set xRg = Intersect(Range("D23"), Target)
+                                                                If Not xRg Is Nothing Then
+                                                                    x = True
+                                                                    Acq_Name = Range("B3")
+                                                                    For Each r In Range("D23")
+                                                                        If r.Value <> "No" Then
+                                                                            x = False
+                                                                        End If
+                                                                    Next r
+                                                                    If x = True Then
+                                                                        MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                        Call Rec_Incomplete_Email
+                                                                    End If
+                                                                Else
+                                                                    'Acquisition Provider B Incomplete First
+                                                                    Set xRg = Intersect(Range("E23"), Target)
+                                                                    If Not xRg Is Nothing Then
+                                                                        x = True
+                                                                        Acq_Name = Range("E3")
+                                                                        For Each r In Range("E23")
+                                                                            If r.Value <> "No" Then
+                                                                                x = False
+                                                                            End If
+                                                                        Next r
+                                                                        If x = True Then
+                                                                            MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                            Call Rec_Incomplete_Email
+                                                                        End If
+                                                                    Else
+                                                                        'Acquisition Provider B Incomplete Second
+                                                                        Set xRg = Intersect(Range("F23"), Target)
+                                                                        If Not xRg Is Nothing Then
+                                                                            x = True
+                                                                            Acq_Name = Range("E3")
+                                                                            For Each r In Range("F23")
+                                                                                If r.Value <> "No" Then
+                                                                                    x = False
+                                                                                End If
+                                                                            Next r
+                                                                            If x = True Then
+                                                                                MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                Call Rec_Incomplete_Email
+                                                                            End If
+                                                                        Else
+                                                                            'Acquisition Provider B Incomplete Third
+                                                                            Set xRg = Intersect(Range("G23"), Target)
+                                                                            If Not xRg Is Nothing Then
+                                                                                x = True
+                                                                                Acq_Name = Range("E3")
+                                                                                For Each r In Range("G23")
+                                                                                    If r.Value <> "No" Then
+                                                                                        x = False
+                                                                                    End If
+                                                                                Next r
+                                                                                If x = True Then
+                                                                                    MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                    Call Rec_Incomplete_Email
+                                                                                End If
+                                                                            Else
+                                                                                'Acquisition Provider C Incomplete First
+                                                                                Set xRg = Intersect(Range("H23"), Target)
+                                                                                If Not xRg Is Nothing Then
+                                                                                    x = True
+                                                                                    Acq_Name = Range("H3")
+                                                                                    For Each r In Range("H23")
+                                                                                        If r.Value <> "No" Then
+                                                                                            x = False
+                                                                                        End If
+                                                                                    Next r
+                                                                                    If x = True Then
+                                                                                        MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                        Call Rec_Incomplete_Email
+                                                                                    End If
+                                                                                Else
+                                                                                    'Acquisition Provider C Incomplete Second
+                                                                                    Set xRg = Intersect(Range("I23"), Target)
+                                                                                    If Not xRg Is Nothing Then
+                                                                                        x = True
+                                                                                        Acq_Name = Range("H3")
+                                                                                        For Each r In Range("I23")
+                                                                                            If r.Value <> "No" Then
+                                                                                                x = False
+                                                                                            End If
+                                                                                        Next r
+                                                                                        If x = True Then
+                                                                                            MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                            Call Rec_Incomplete_Email
+                                                                                        End If
+                                                                                    Else
+                                                                                        'Acquisition Provider C Incomplete Third
+                                                                                        Set xRg = Intersect(Range("J23"), Target)
+                                                                                        If Not xRg Is Nothing Then
+                                                                                            x = True
+                                                                                            Acq_Name = Range("H3")
+                                                                                            For Each r In Range("J23")
+                                                                                                If r.Value <> "No" Then
+                                                                                                    x = False
+                                                                                                End If
+                                                                                            Next r
+                                                                                            If x = True Then
+                                                                                                MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                                Call Rec_Incomplete_Email
+                                                                                            End If
+                                                                                        Else
+                                                                                            'Acquistion Provider D Incomplete First
+                                                                                            Set xRg = Intersect(Range("K23"), Target)
+                                                                                            If Not xRg Is Nothing Then
+                                                                                                x = True
+                                                                                                Acq_Name = Range("K3")
+                                                                                                For Each r In Range("K23")
+                                                                                                    If r.Value <> "No" Then
+                                                                                                        x = False
+                                                                                                    End If
+                                                                                                Next r
+                                                                                                If x = True Then
+                                                                                                    MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                                    Call Rec_Incomplete_Email
+                                                                                                End If
+                                                                                            Else
+                                                                                                'Acquisition Provider D Incomplete Second
+                                                                                                Set xRg = Intersect(Range("L23"), Target)
+                                                                                                If Not xRg Is Nothing Then
+                                                                                                    x = True
+                                                                                                    Acq_Name = Range("K3")
+                                                                                                    For Each r In Range("L23")
+                                                                                                        If r.Value <> "No" Then
+                                                                                                            x = False
+                                                                                                        End If
+                                                                                                    Next r
+                                                                                                    If x = True Then
+                                                                                                        MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                                        Call Rec_Incomplete_Email
+                                                                                                    End If
+                                                                                                Else
+                                                                                                    'Acquisition Provider D Incomplete Third
+                                                                                                    Set xRg = Intersect(Range("M23"), Target)
+                                                                                                    If Not xRg Is Nothing Then
+                                                                                                        x = True
+                                                                                                        Acq_Name = Range("K3")
+                                                                                                        For Each r In Range("M23")
+                                                                                                            If r.Value <> "No" Then
+                                                                                                                x = False
+                                                                                                            End If
+                                                                                                        Next r
+                                                                                                        If x = True Then
+                                                                                                            MsgBox "Acquisition Report Incomplete: Auto Email Sent"
+                                                                                                            Call Rec_Incomplete_Email
+                                                                                                        End If
+                                                                                                    End If
+                                                                                                End If
+                                                                                            End If
+                                                                                        End If
+                                                                                    End If
+                                                                                End If
+                                                                            End If
+                                                                        End If
+                                                                    End If
+                                                                End If
+                                                            End If
+                                                        End If
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+End Sub
+
+Sub Rec_Received_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = Acq_Name & " Report: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = Acq_Name & " Report: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " is now available." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
+
+Sub Rec_Incomplete_Email()
+    Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B8").Value & ";" & Sheets("Summary").Range("B11").Value & _
+    ";" & Sheets("Summary").Range("B13").Value & ";" & Sheets("Summary").Range("B15").Value
+    .Subject = Acq_Name & " Report: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = Acq_Name & " Report: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " is missing required data. Additional action is required." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub

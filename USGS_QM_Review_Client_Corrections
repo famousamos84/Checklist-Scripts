@@ -1,0 +1,47 @@
+Sub Worksheet_Change(ByVal Target As Range)
+On Error Resume Next
+If Target.Cells.Count > 1 Then Exit Sub
+
+Set xRg = Intersect(Range("C165"), Target)
+If Not xRg Is Nothing Then
+    x = True
+    For Each r In Range("C165")
+        If r.Value <> "Pass" And r.Value <> "Complete" Then
+            x = False
+        End If
+    Next r
+    If x = True Then
+        MsgBox "Client corrections have been reviewed: Auto Email sent to QM Team"
+        Call TL_Client_Corrections_Email
+    End If
+End If
+
+End Sub
+
+Sub TL_Client_Corrections_Email()
+Dim objOutlookApp As Object
+    Dim objMail As Object
+
+    On Error Resume Next
+    Set objOutlookApp = CreateObject("Outlook.Application")
+    Set objMail = objOutlookApp.CreateItem(olMailItem)
+
+    With objMail
+    .To = "jmnovac@Dewberry.com" & "; " & "mmmccall@Dewberry.com" & "; " & "acollins@Dewberry.com"
+    .CC = Sheets("Summary").Range("B4").Value & "; " & Sheets("Summary").Range("B6").Value & ";" & Sheets("Summary").Range("B10").Value & ";" & Sheets("Summary").Range("B13").Value & ";" _
+    & Sheets("Summary").Range("B15").Value
+    .Subject = "QM Client Corrections: " & Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19")
+    .Body = Sheets("Summary").Range("C18") & " -- " & Sheets("Summary").Range("C19") & " client corrections have been reviewed by the QM Team." _
+    & vbLf & vbLf & "Project Information: " & vbLf & vbLf & "Project Name: " & Sheets("Summary").Range("C18") & vbLf & "County Name: " _
+    & Sheets("Summary").Range("C19") & vbLf & "Client: " & Sheets("Summary").Range("C20") & vbLf & "Lidar Base Specification Version: " & Sheets("Summary").Range("C21") _
+    & vbLf & "Horizontal Datum/Projection: " & Sheets("Summary").Range("C22") & vbLf & "Vertical Datum: " & Sheets("Summary").Range("C23") _
+    & vbLf & "Geoid: " & Sheets("Summary").Range("C24") & vbLf & "Units: " & Sheets("Summary").Range("C25") & vbLf & "Project Folder Path: " _
+    & Sheets("Summary").Range("C26") & vbLf & "Swath LAS Folder: " & Sheets("Summary").Range("C27") & vbLf & "Tiled LAS Folder: " _
+    & Sheets("Summary").Range("C28") & vbLf & "Final LAS Folder: " & Sheets("Summary").Range("C29") & vbLf & "Final Intensity: " & Sheets("Summary").Range("C30") _
+    & vbLf & "Were the breaklines completed by a sub-contractor? " & Sheets("Summary").Range("C31") & vbLf & "Was the final Lidar classification completed by a sub-contractor? " _
+    & Sheets("Summary").Range("C32")
+    'Attach this workbook
+    '.Attachments.Add ActiveWorkbook.FullName
+    .Send
+    End With
+End Sub
